@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+        namespace="es.jambo.product_store.product.price_finder.infrastructure.persistence.dao.ProductPriceDAO">
+
+    <select id="find" resultMap="basicMapper">
+        SELECT
+        BRAND_ID,
+        PRODUCT_ID,
+        PRODUCT_RATE,
+        START_AT,
+        END_AT,
+        PRICE,
+        PRIORITY,
+        CURR
+        FROM PRODUCT_PRICES
+        WHERE BRAND_ID = #{brandId}
+        AND PRODUCT_ID = #{productId}
+        <![CDATA[
+        AND START_AT <= #{date}
+                ]]>
+        AND END_AT >= #{date}
+    </select>
+
+    <!--resultmaps-->
+    <resultMap id="basicMapper"
+               type="es.jambo.product_store.product.price_finder.infrastructure.persistence.model.ProductPricePO">
+
+        <result column="BRAND_ID" property="brandId" javaType="String"/>
+        <result column="PRODUCT_ID" property="productId" javaType="String"/>
+        <result column="PRODUCT_RATE" property="productRate" javaType="String"/>
+        <result column="START_AT" property="startAt" javaType="java.time.LocalDateTime"/>
+        <result column="END_AT" property="endAt" javaType="java.time.LocalDateTime"/>
+        <result column="PRICE" property="price" javaType="Double"/>
+        <result column="PRIORITY" property="priority" javaType="Integer"/>
+        <result column="CURR" property="curr" javaType="String"/>
+    </resultMap>
+</mapper>
