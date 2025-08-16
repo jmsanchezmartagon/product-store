@@ -12,13 +12,13 @@ import java.util.UUID;
 @Component
 public final class ProductPriceDataGenerator {
 
-    private final String INSERT_PRODUCT_PRICE = """
+    private static final String INSERT_PRODUCT_PRICE = """
                 INSERT INTO PRODUCT_PRICES (
                     brand_id, product_id, start_at, end_at, product_rate, priority, price, curr
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
-    private final String DELETE_PRODUCT_PRICE = "DELETE FROM PRODUCT_PRICES";
+    private static final String DELETE_PRODUCT_PRICE = "DELETE FROM PRODUCT_PRICES";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
