@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>es.jambo</groupId>
+    <artifactId>product-store</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>product-store</name>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <description>An example of hexagonal architecture with api first</description>
+
+    <url>https://github.com/jmsanchezmartagon/product-store</url>
+    <developers>
+        <developer>
+            <id>jmsanchezmartagon@gmail.com</id>
+            <name>Juan Manuel Sánchez Martagón</name>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>24</java.version>
+        <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
+        <mybatis.version>3.0.5</mybatis.version>
+        <springdoc.version>2.8.9</springdoc.version>
+        <openapi.jackson.version>0.2.6</openapi.jackson.version>
+        <openapi.plugin.version>7.14.0</openapi.plugin.version>
+    </properties>
+
+    <modules>
+        <module>product-store-api</module>
+        <module>product-store-app</module>
+    </modules>
+
+    <dependencyManagement>
+
+        <dependencies>
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${jakarta.servlet.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter-test</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>jackson-databind-nullable</artifactId>
+                <version>${openapi.jackson.version}</version>
+            </dependency>
+
+            <!-- plugins -->
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi.plugin.version}</version>
+                <type>maven-plugin</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

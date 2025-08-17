@@ -1,0 +1,86 @@
+openapi: 3.0.4
+info:
+  title: Swagger ProductStore - OpenAPI 3.0
+  description: |-
+    This is a sample ProductStore Server based on the OpenAPI 3.0 specification.
+  termsOfService: https://swagger.io/terms/
+  contact:
+    email: jmsanchezmartagon@gmail.com
+  license:
+    name: GPL
+    url: https://github.com/jmsanchezmartagon/product-store/blob/main/LICENSE
+  version: 1.0.12
+servers:
+  - url: https://localhost:8080
+tags:
+  - name: productPrice
+    description: Product Price Info
+
+paths:
+  /brand/{brandId}/product/{productId}/price:
+    get:
+      tags:
+        - productPrice
+      summary: Get product price
+      description: Returns the price of a product from a brand at a specific date and time
+      parameters:
+        - name: brandId
+          in: path
+          required: true
+          description: UUID of the brand
+          schema:
+            type: string
+            example: "123e4567-e89b-12d3-a456-426614174000"
+        - name: productId
+          in: path
+          required: true
+          description: UUID of the product
+          schema:
+            type: string
+            example: "987e6543-e21b-12d3-a456-426614174111"
+        - name: datetime
+          in: query
+          required: true
+          description: Date and time in ISO 8601 format
+          schema:
+            type: string
+            format: local-date-time
+            example: "2025-04-01T00:12:34"
+      responses:
+        '200':
+          description: Product Price at a specific time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPrice'
+        '404':
+          description: Product Price not found
+        '422':
+          description: Validation exception
+components:
+  schemas:
+    ProductPrice:
+      type: object
+      required:
+        - brandId
+        - productId
+        - productRate
+        - startAt
+        - endAt
+        - price
+      properties:
+        brandId:
+          type: string
+        productId:
+          type: string
+        productRate:
+          type: string
+        startAt:
+          type: string
+          format: local-date-time
+        endAt:
+          type: string
+          format: local-date-time
+        price:
+          type: number
+          format: double
