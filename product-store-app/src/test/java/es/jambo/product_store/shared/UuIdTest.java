@@ -2,6 +2,7 @@ package es.jambo.product_store.shared;
 
 import es.jambo.product_store.config.shared.error.ApplicationException;
 import es.jambo.product_store.config.shared.message.KeyMessageSource;
+import es.jambo.product_store.shared.application.model.UuId;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

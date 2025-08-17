@@ -3,14 +3,14 @@ package es.jambo.product_store.product.price_finder.application;
 import es.jambo.product_store.config.shared.error.ApplicationException;
 import es.jambo.product_store.config.shared.error.ApplicationNotFoundException;
 import es.jambo.product_store.config.shared.message.KeyMessageSource;
-import es.jambo.product_store.product.price_finder.application.dto.ProductPriceDTO;
-import es.jambo.product_store.product.price_finder.application.dto.QueryPriceDTO;
+import es.jambo.product_store.product.price_finder.application.model.PriceFinderQuery;
+import es.jambo.product_store.product.price_finder.application.model.ProductPriceResult;
 import es.jambo.product_store.product.price_finder.application.projection.ProductPriceProjection;
-import es.jambo.product_store.shared.UuId;
+import es.jambo.product_store.shared.application.model.UuId;
 import org.springframework.stereotype.Service;
 
 @Service
-final class ProductPriceFinderImpl implements ProductPriceFinder {
+final class ProductPriceFinderImpl implements es.jambo.product_store.product.price_finder.application.ProductPriceFinder {
 
     private final ProductPriceProjection productPriceProjection;
 
@@ -19,27 +19,27 @@ final class ProductPriceFinderImpl implements ProductPriceFinder {
     }
 
     @Override
-    public ProductPriceDTO getPrice(QueryPriceDTO query) {
+    public ProductPriceResult getPrice(PriceFinderQuery query) {
         validateQuery(query);
 
         return getProductPrice(query);
     }
 
-    private void validateQuery(QueryPriceDTO queryPriceDTO) {
-        validateUuid(queryPriceDTO.getBrandId(), KeyMessageSource.APPLICATION_PRODUCT_PRICE_BRAND_IS_REQUIRED,
+    private void validateQuery(PriceFinderQuery priceFinderQuery) {
+        validateUuid(priceFinderQuery.getBrandId(), KeyMessageSource.APPLICATION_PRODUCT_PRICE_BRAND_IS_REQUIRED,
                 KeyMessageSource.APPLICATION_PRODUCT_PRICE_BRAND_IS_NOT_VALID);
 
-        validateUuid(queryPriceDTO.getProductId(), KeyMessageSource.APPLICATION_PRODUCT_PRICE_PRODUCT_IS_REQUIRED,
+        validateUuid(priceFinderQuery.getProductId(), KeyMessageSource.APPLICATION_PRODUCT_PRICE_PRODUCT_IS_REQUIRED,
                 KeyMessageSource.APPLICATION_PRODUCT_PRICE_PRODUCT_IS_NOT_VALID);
 
-        validateDate(queryPriceDTO);
+        validateDate(priceFinderQuery);
     }
 
-    private ProductPriceDTO getProductPrice(QueryPriceDTO query) {
+    private ProductPriceResult getProductPrice(PriceFinderQuery query) {
         final var prices = productPriceProjection.getPrices(query);
 
         return prices.stream().reduce((priceX, priceY) -> priceX.getPriority() > priceY.getPriority() ? priceX : priceY)
-                .map(ProductPriceDTOMapper.FROM::view).orElseThrow(ApplicationNotFoundException::new);
+                .map(ProductPriceResultMapper.FROM::view).orElseThrow(ApplicationNotFoundException::new);
     }
 
     private void validateUuid(String value, String errorKeyRequired, String errorKeyNotValid) {
@@ -51,8 +51,8 @@ final class ProductPriceFinderImpl implements ProductPriceFinder {
         }
     }
 
-    private void validateDate(QueryPriceDTO queryPriceDTO) {
-        if (queryPriceDTO.getPriceDate() == null) {
+    private void validateDate(PriceFinderQuery priceFinderQuery) {
+        if (priceFinderQuery.getPriceDate() == null) {
             throw new ApplicationException(KeyMessageSource.APPLICATION_PRODUCT_PRICE_DATE_IS_REQUIRED);
         }
     }

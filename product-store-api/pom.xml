@@ -19,22 +19,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         </dependency>
-
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.openapitools</groupId>
             <artifactId>jackson-databind-nullable</artifactId>
-            <version>0.2.6</version>
         </dependency>
     </dependencies>
 
@@ -44,7 +40,6 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.14.0</version> <!-- usa la última versión -->
                 <executions>
                     <execution>
                         <id>generate-spring</id>
@@ -57,18 +52,21 @@
                             <generatorName>spring</generatorName>
 
                             <output>${project.build.directory}/generated-sources/openapi</output>
-
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <skipDefaultInterface>true</skipDefaultInterface>
-                                <useTags>true</useTags>
                                 <useJakartaEe>true</useJakartaEe>
                             </configOptions>
 
                             <apiPackage>es.jambo.product_store.infrastructure.entrypoint.api.controllers</apiPackage>
                             <modelPackage>es.jambo.product_store.infrastructure.entrypoint.api.models</modelPackage>
-                            <invokerPackage>es.jambo.product_store.infrastructure.entrypoint.api.invoker
-                            </invokerPackage>
+
+                            <typeMappings>
+                                <typeMapping>local-date-time=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>LocalDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                         </configuration>
                     </execution>
                 </executions>

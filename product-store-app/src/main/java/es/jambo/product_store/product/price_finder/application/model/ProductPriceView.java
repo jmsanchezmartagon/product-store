@@ -1,4 +1,4 @@
-package es.jambo.product_store.product.price_finder.application.projection;
+package es.jambo.product_store.product.price_finder.application.model;
 
 import lombok.Data;
 

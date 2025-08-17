@@ -1,4 +1,4 @@
-package es.jambo.product_store.shared;
+package es.jambo.product_store.shared.application.model;
 
 import es.jambo.product_store.config.shared.error.ApplicationException;
 import es.jambo.product_store.config.shared.message.KeyMessageSource;

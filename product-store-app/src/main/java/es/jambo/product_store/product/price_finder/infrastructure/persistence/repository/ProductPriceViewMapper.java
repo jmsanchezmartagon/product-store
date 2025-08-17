@@ -1,6 +1,6 @@
 package es.jambo.product_store.product.price_finder.infrastructure.persistence.repository;
 
-import es.jambo.product_store.product.price_finder.application.projection.ProductPriceView;
+import es.jambo.product_store.product.price_finder.application.model.ProductPriceView;
 import es.jambo.product_store.product.price_finder.infrastructure.persistence.model.ProductPricePO;
 
 enum ProductPriceViewMapper {

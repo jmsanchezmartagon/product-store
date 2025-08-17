@@ -1,6 +1,7 @@
 package es.jambo.product_store.utils.product;
 
-import es.jambo.product_store.product.price_finder.application.projection.ProductPriceView;
+import es.jambo.product_store.product.price_finder.application.model.ProductPriceResult;
+import es.jambo.product_store.product.price_finder.application.model.ProductPriceView;
 import es.jambo.product_store.product.price_finder.infrastructure.persistence.model.ProductPricePO;
 
 import java.math.BigDecimal;
@@ -18,8 +19,24 @@ public enum ProductPriceUtil {
     public static final int PRIORITY = 0;
 
 
+    public ProductPriceResult createProductPriceResult() {
+        return ProductPriceResult.builder()
+                .brandId(BRAND_ID)
+                .productId(PRODUCT_ID)
+                .price(30.45D)
+                .startAt(LocalDateTime.now().minusMonths(1))
+                .endAt(LocalDateTime.now().plusMonths(3))
+                .productRate(UUID.randomUUID().toString())
+                .build();
+    }
+
     public ProductPriceView createProductPriceViewWithRandomRate(LocalDateTime startAt, LocalDateTime endAt, double price) {
         return createProductPriceView(startAt, endAt, UUID.randomUUID().toString(), PRIORITY, price);
+    }
+
+
+    public ProductPriceView getProductPriceView() {
+        return createProductPriceView(LocalDateTime.now().minusMonths(5), LocalDateTime.now().plusMonths(8), UUID.randomUUID().toString(), PRIORITY, 25.1D);
     }
 
     public ProductPriceView createProductPriceView(LocalDateTime startAt, LocalDateTime endAt, String rate, int priority, double price) {
@@ -33,7 +50,6 @@ public enum ProductPriceUtil {
         priceView.setEndAt(endAt);
         return priceView;
     }
-
 
     public ProductPricePO createRandomPO() {
         final var price = new ProductPricePO();

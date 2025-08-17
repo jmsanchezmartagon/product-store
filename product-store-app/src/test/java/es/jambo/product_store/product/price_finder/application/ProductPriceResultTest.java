@@ -2,9 +2,9 @@ package es.jambo.product_store.product.price_finder.application;
 
 import es.jambo.product_store.config.shared.error.ApplicationException;
 import es.jambo.product_store.config.shared.message.KeyMessageSource;
-import es.jambo.product_store.product.price_finder.application.dto.QueryPriceDTO;
+import es.jambo.product_store.product.price_finder.application.model.PriceFinderQuery;
+import es.jambo.product_store.product.price_finder.application.model.ProductPriceView;
 import es.jambo.product_store.product.price_finder.application.projection.ProductPriceProjection;
-import es.jambo.product_store.product.price_finder.application.projection.ProductPriceView;
 import es.jambo.product_store.utils.product.ProductPriceUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
-class ProductPriceFinderTest {
+class ProductPriceResultTest {
 
     @InjectMocks
     private ProductPriceFinderImpl productPriceFinder;
@@ -28,7 +28,7 @@ class ProductPriceFinderTest {
 
     @Test
     void should_throwError_when_brandIsNull() {
-        final var query = QueryPriceDTO.builder().brandId(null).build();
+        final var query = PriceFinderQuery.builder().brandId(null).build();
 
         Assertions.assertThatExceptionOfType(ApplicationException.class).isThrownBy(() -> productPriceFinder.getPrice(query))
                 .withMessage(KeyMessageSource.APPLICATION_PRODUCT_PRICE_BRAND_IS_REQUIRED);
@@ -37,7 +37,7 @@ class ProductPriceFinderTest {
 
     @Test
     void should_throwError_when_brandIsEmpty() {
-        final var query = QueryPriceDTO.builder().brandId("").build();
+        final var query = PriceFinderQuery.builder().brandId("").build();
 
         Assertions.assertThatExceptionOfType(ApplicationException.class).isThrownBy(() -> productPriceFinder.getPrice(query))
                 .withMessage(KeyMessageSource.APPLICATION_PRODUCT_PRICE_BRAND_IS_NOT_VALID);
@@ -45,7 +45,7 @@ class ProductPriceFinderTest {
 
     @Test
     void should_throwError_when_productIsNull() {
-        final var query = QueryPriceDTO.builder().brandId(UUID.randomUUID().toString())
+        final var query = PriceFinderQuery.builder().brandId(UUID.randomUUID().toString())
                 .productId(null).build();
 
         Assertions.assertThatExceptionOfType(ApplicationException.class).isThrownBy(() -> productPriceFinder.getPrice(query))
@@ -55,7 +55,7 @@ class ProductPriceFinderTest {
 
     @Test
     void should_throwError_when_productIsEmpty() {
-        final var query = QueryPriceDTO.builder().brandId(UUID.randomUUID().toString())
+        final var query = PriceFinderQuery.builder().brandId(UUID.randomUUID().toString())
                 .productId("").build();
 
         Assertions.assertThatExceptionOfType(ApplicationException.class).isThrownBy(() -> productPriceFinder.getPrice(query))
@@ -65,7 +65,7 @@ class ProductPriceFinderTest {
 
     @Test
     void should_throwError_when_dateIsNull() {
-        final var query = QueryPriceDTO.builder().brandId(UUID.randomUUID().toString())
+        final var query = PriceFinderQuery.builder().brandId(UUID.randomUUID().toString())
                 .productId(UUID.randomUUID().toString())
                 .priceDate(null).build();
 
@@ -97,8 +97,8 @@ class ProductPriceFinderTest {
         Assertions.assertThat(result.getProductRate()).isEqualTo(expectedRate);
     }
 
-    private QueryPriceDTO createQueryFilterByNow() {
-        return QueryPriceDTO.builder().brandId(UUID.randomUUID().toString())
+    private PriceFinderQuery createQueryFilterByNow() {
+        return PriceFinderQuery.builder().brandId(UUID.randomUUID().toString())
                 .productId(UUID.randomUUID().toString())
                 .priceDate(LocalDateTime.now()).build();
     }
