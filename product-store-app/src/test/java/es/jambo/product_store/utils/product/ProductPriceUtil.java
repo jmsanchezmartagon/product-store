@@ -64,6 +64,18 @@ public enum ProductPriceUtil {
         return price;
     }
 
+    public ProductPricePO createProductPO(String rate, LocalDateTime startAt, LocalDateTime endAt, int priority, double price) {
+        final var entity = new ProductPricePO();
+        entity.setBrandId(BRAND_ID);
+        entity.setProductId(PRODUCT_ID);
+        entity.setStartAt(startAt);
+        entity.setEndAt(endAt);
+        entity.setProductRate(rate);
+        entity.setPriority(priority);
+        entity.setPrice(price);
+        entity.setCurr("EUR");
+        return entity;
+    }
 
     public ProductPricePO createProductPO(String productId, LocalDateTime startAt, LocalDateTime endAt) {
         final var price = new ProductPricePO();
