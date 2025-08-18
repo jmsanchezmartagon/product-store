@@ -71,13 +71,6 @@
                 <version>${openapi.jackson.version}</version>
             </dependency>
 
-            <!-- plugins -->
-            <dependency>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapi.plugin.version}</version>
-                <type>maven-plugin</type>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

@@ -23,6 +23,7 @@ paths:
         - productPrice
       summary: Get product price
       description: Returns the price of a product from a brand at a specific date and time
+      operationId: brandBrandIdProductProductIdPriceGet
       parameters:
         - name: brandId
           in: path
