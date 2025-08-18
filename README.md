@@ -67,3 +67,11 @@ java -jar product-store-app/target/product-store-app-0.0.1-SNAPSHOT.jar
 ```
 curl -X GET "http://localhost:8080/brand/97881746-0fc5-4c5d-b0e1-238a54237972/product/b25ca18c-a55d-479d-986b-4a95f7b95a19/price?datetime=2025-08-17T15:30:00" -H "accept: application/json"
 ```
+
+---
+
+## License
+
+This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
+
+**Commercial use is strictly prohibited.**
