@@ -29,7 +29,11 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+    - name: Install SonarQube scanner
+      # You may pin to the exact commit or the version.
+      # uses: nosinovacao/sonarscanner@e4b74734c45d79094e4b16c47a47fc57bc012930
+      uses: nosinovacao/sonarscanner@v1
+      with:
+         javaVersion: 24# optional, default is 21
+          
+          
