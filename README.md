@@ -2,8 +2,8 @@
 
 ## Overview
 
-This project is a **Price Service** for an e-commerce platform, implemented with **Spring Boot** and following *
-*Hexagonal Architecture (Ports & Adapters)**.
+This project is a **Price Service** for an e-commerce platform, implemented with **Spring Boot** and following
+**Hexagonal Architecture**.
 
 The service allows querying the applicable price for a product at a given date and returns the final price based on
 tariff priority.
@@ -44,16 +44,16 @@ git clone <repository-url>
 cd <repository-folder>
 ```
 
-### Run Test:
-
-```
-mvnw clean test
-```
-
 ### Build the project:
 
 ```
 mvnw clean install
+```
+
+### Run Test:
+
+```
+mvnw clean test
 ```
 
 ### Run the application:
