@@ -9,7 +9,7 @@ The service allows querying the applicable price for a product at a given date a
 tariff priority.
 
 The service uses an **H2 in-memory database** initialized with example data from the `PRICES` table.
-
+![DT-ARCH.png](data/DT-ARCH.png)
 ---
 
 ## Database Example: `PRODUCT_PRICES`
@@ -20,6 +20,8 @@ The service uses an **H2 in-memory database** initialized with example data from
 | 1        | 2020-06-14 15:00:00 | 2020-06-14 18:30:00 | 2            | 35455      | 1        | 25.45 | EUR  |
 | 1        | 2020-06-15 00:00:00 | 2020-06-15 11:00:00 | 3            | 35455      | 1        | 30.50 | EUR  |
 | 1        | 2020-06-15 16:00:00 | 2020-12-31 23:59:59 | 4            | 35455      | 1        | 38.95 | EUR  |
+
+![DT-ER.png](data/DT-ER.png)
 
 ### Table Fields
 
@@ -42,16 +44,22 @@ git clone <repository-url>
 cd <repository-folder>
 ```
 
+### Run Test:
+
+```
+mvnw clean test
+```
+
 ### Build the project:
 
 ```
-mvn clean install
+mvnw clean install
 ```
 
 ### Run the application:
 
 ```
-mvn spring-boot:run
+java -jar product-store-app/target/product-store-app-0.0.1-SNAPSHOT.jar
 ```
 
 ### Access the API:
