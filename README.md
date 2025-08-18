@@ -9,7 +9,9 @@ The service allows querying the applicable price for a product at a given date a
 tariff priority.
 
 The service uses an **H2 in-memory database** initialized with example data from the `PRICES` table.
+
 ![DT-ARCH.png](data/DT-ARCH.png)
+
 ---
 
 ## Database Example: `PRODUCT_PRICES`
