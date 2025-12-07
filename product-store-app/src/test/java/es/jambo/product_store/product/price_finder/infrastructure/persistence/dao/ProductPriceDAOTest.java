@@ -60,7 +60,7 @@ class ProductPriceDAOTest {
 
     @Test
     void should_returnPricesSortedByPriorityAndId_when_multipleMatchesExist() {
-        // Given
+
         final var now = LocalDateTime.now();
         final var brandId = java.util.UUID.randomUUID().toString();
         final var productId = java.util.UUID.randomUUID().toString();
@@ -87,15 +87,11 @@ class ProductPriceDAOTest {
         productPriceDataGenerator.insertPO(p1);
         productPriceDataGenerator.insertPO(p2);
 
-        // When
         final var result = productPriceDAO.find(brandId, productId, now);
 
-        // Then
         Assertions.assertThat(result).hasSize(3);
+
         // Expected order: Priority ASC, then Price ASC.
-        // 1. p1 (Priority 0)
-        // 2. p2 (Priority 1, Price 5.0)
-        // 3. p3 (Priority 1, Price 20.0)
         Assertions.assertThat(result.get(0).getProductRate()).isEqualTo("RATE-1");
         Assertions.assertThat(result.get(1).getProductRate()).isEqualTo("RATE-2");
         Assertions.assertThat(result.get(2).getProductRate()).isEqualTo("RATE-3");

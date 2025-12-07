@@ -27,35 +27,29 @@ class ProductPriceFinderBehaviorTest {
 
     @Test
     void should_returnHigherPrice_when_multiplePricesExistWithSamePriority() {
-        // GIVEN
+
         final var query = givenAValidQuery();
         final var lowerPrice = givenAPriceWith(10.0, 1);
         final var higherPrice = givenAPriceWith(20.0, 1);
 
-        // Simulating DB return order (ASCENDING by PRICE as per our fix)
         givenTheProjectionReturns(query, List.of(lowerPrice, higherPrice));
 
-        // WHEN
         final var result = productPriceFinder.getPrice(query);
 
-        // THEN
         thenThePriceIs(result, 20.0);
     }
 
     @Test
     void should_returnHighestPriority_when_multiplePrioritiesExist() {
-        // GIVEN
+
         final var query = givenAValidQuery();
         final var lowPriorityPrice = givenAPriceWith(50.0, 0);
         final var highPriorityPrice = givenAPriceWith(20.0, 1);
 
-        // Simulating DB return order (ASCENDING by PRIORITY)
         givenTheProjectionReturns(query, List.of(lowPriorityPrice, highPriorityPrice));
 
-        // WHEN
         final var result = productPriceFinder.getPrice(query);
 
-        // THEN
         thenThePriceIs(result, 20.0);
     }
 
