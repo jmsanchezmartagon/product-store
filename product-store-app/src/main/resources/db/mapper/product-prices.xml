@@ -21,6 +21,7 @@
         AND START_AT <= #{date}
                 ]]>
         AND END_AT >= #{date}
+        ORDER BY PRIORITY ASC, PRICE ASC
     </select>
 
     <!--resultmaps-->

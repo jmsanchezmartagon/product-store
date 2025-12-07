@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.4</version>
+        <version>3.5.8</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -27,7 +27,7 @@
     </developers>
 
     <properties>
-        <java.version>24</java.version>
+        <java.version>25</java.version>
         <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
         <mybatis.version>3.0.5</mybatis.version>
         <springdoc.version>2.8.9</springdoc.version>

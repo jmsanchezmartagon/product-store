@@ -7,10 +7,11 @@ import es.jambo.product_store.product.price_finder.application.model.PriceFinder
 import es.jambo.product_store.product.price_finder.application.model.ProductPriceResult;
 import es.jambo.product_store.product.price_finder.application.projection.ProductPriceProjection;
 import es.jambo.product_store.shared.application.model.UuId;
-import org.springframework.stereotype.Service;
+import es.jambo.product_store.shared.application.annotation.UseCase;
 
-@Service
-final class ProductPriceFinderImpl implements es.jambo.product_store.product.price_finder.application.ProductPriceFinder {
+@UseCase
+final class ProductPriceFinderImpl
+        implements ProductPriceFinder {
 
     private final ProductPriceProjection productPriceProjection;
 
